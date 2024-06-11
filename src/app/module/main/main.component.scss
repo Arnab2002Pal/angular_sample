@@ -1,0 +1,26 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; // This makes the container full height of the viewport
+}
+
+button {
+    background-color: #007bff; // Primary color
+    color: white; // Text color
+    border: none; // Remove default border
+    padding: 10px 20px; // Padding inside the button
+    font-size: 16px; // Font size of the text
+    border-radius: 5px; // Rounded corners
+    cursor: pointer; // Pointer cursor on hover
+    transition: background-color 0.3s; // Smooth transition for background color
+
+    &:hover {
+        background-color: #0056b3; // Darker shade on hover
+    }
+
+    &:focus {
+        outline: none; // Remove default outline on focus
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); // Custom focus outline
+    }
+}

@@ -1,0 +1,27 @@
+<app-nav-bar />
+<div class="my-2 flex flex-row justify-around items-center gap-4">
+  <app-global-search (searchEvent)="onSearch($event)" />
+
+  <button
+    (click)="add()"
+    type="button"
+    class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+  >
+    Add
+  </button>
+</div>
+
+<ag-grid-angular
+  [rowData]="rowData"
+  [columnDefs]="colDefs"
+  class="ag-theme-quartz"
+  style="height: 500px"
+  [pagination]="true"
+  [paginationPageSize]="10"
+  (rowClicked)="rowClicked($event)"
+>
+</ag-grid-angular>
+
+<app-user-data />
+
+<button (click)="logout()" class="flex justify-center items-center mx-auto my-5 bg-red-500 px-4 py-2 text-white rounded-md">Logout</button>

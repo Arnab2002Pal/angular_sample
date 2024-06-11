@@ -1,0 +1,145 @@
+<div
+  class="modal"
+  [class.show]="show"
+  (click)="onClose()"
+  role="dialog"
+  aria-labelledby="modalTitle"
+  aria-modal="true"
+>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close" (click)="onClose()" aria-label="Close modal">
+      &times;
+    </button>
+    <h1 id="modalTitle" class="text-4xl font-medium mb-6">User Details</h1>
+    <div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <form [formGroup]="form">
+          <div class="flex flex-col">
+            <label class="label" for="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              formControlName="firstName"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              formControlName="lastName"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="contactNo">Contact No:</label>
+            <input
+              type="text"
+              id="contactNo"
+              formControlName="contactNo"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            @if(mode === "add"){
+            <label class="label" for="dob">Date of Birth:</label>
+            <input
+              type="date"
+              id="dob"
+              formControlName="dob"
+              class="input-field"
+            />
+            }
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="workExperience">Work Experience:</label>
+            <input
+              type="text"
+              id="workExperience"
+              formControlName="workExperience"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="addressLine1">Address Line 1:</label>
+            <input
+              type="text"
+              id="addressLine1"
+              formControlName="addressLine1"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="addressLine2">Address Line 2:</label>
+            <input
+              type="text"
+              id="addressLine2"
+              formControlName="addressLine2"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="city">City:</label>
+            <input
+              type="text"
+              id="city"
+              formControlName="city"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="zip">ZIP:</label>
+            <input
+              type="text"
+              id="zip"
+              formControlName="zip"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="country">Country:</label>
+            <input
+              type="text"
+              id="country"
+              formControlName="country"
+              class="input-field"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label class="label" for="state">State:</label>
+            <input
+              type="text"
+              id="state"
+              formControlName="state"
+              class="input-field"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="flex mt-6">
+      @if (mode === 'edit'){
+      <button type="submit" class="button button-edit" (click)="onSubmit()">
+        Edit
+      </button>
+      } @else {
+      <button type="submit" class="button button-edit" (click)="onSubmit()">
+        Add
+      </button>
+      }
+      <button type="button" class="button button-delete" (click)="onDelete()">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
