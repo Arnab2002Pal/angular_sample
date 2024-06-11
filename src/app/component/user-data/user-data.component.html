@@ -12,8 +12,8 @@
     </button>
     <h1 id="modalTitle" class="text-4xl font-medium mb-6">User Details</h1>
     <div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <form [formGroup]="form">
+      <form [formGroup]="form">
+        <div class="form-grid">
           <div class="flex flex-col">
             <label class="label" for="firstName">First Name:</label>
             <input
@@ -22,6 +22,7 @@
               formControlName="firstName"
               class="input-field"
             />
+           
           </div>
           <div class="flex flex-col">
             <label class="label" for="lastName">Last Name:</label>
@@ -31,7 +32,9 @@
               formControlName="lastName"
               class="input-field"
             />
+           
           </div>
+          
           <div class="flex flex-col">
             <label class="label" for="email">Email:</label>
             <input
@@ -40,6 +43,12 @@
               formControlName="email"
               class="input-field"
             />
+            <div
+              *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+              class="error text-red-500"
+            >
+              Valid Email is required.
+            </div>
           </div>
           <div class="flex flex-col">
             <label class="label" for="contactNo">Contact No:</label>
@@ -49,9 +58,16 @@
               formControlName="contactNo"
               class="input-field"
             />
+            <div
+              *ngIf="
+                form.get('contactNo')?.invalid && form.get('contactNo')?.touched
+              "
+              class="error text-red-500"
+              >
+              Contact Number must be 10 digits.
+            </div>
           </div>
           <div class="flex flex-col">
-            @if(mode === "add"){
             <label class="label" for="dob">Date of Birth:</label>
             <input
               type="date"
@@ -59,7 +75,6 @@
               formControlName="dob"
               class="input-field"
             />
-            }
           </div>
           <div class="flex flex-col">
             <label class="label" for="workExperience">Work Experience:</label>
@@ -69,6 +84,15 @@
               formControlName="workExperience"
               class="input-field"
             />
+            <div
+              *ngIf="
+                form.get('workExperience')?.invalid &&
+                form.get('workExperience')?.touched
+              "
+              class="error text-red-500"
+              >
+              Work Experience must be a two-digit number.
+            </div>
           </div>
           <div class="flex flex-col">
             <label class="label" for="addressLine1">Address Line 1:</label>
@@ -105,6 +129,12 @@
               formControlName="zip"
               class="input-field"
             />
+            <div
+              *ngIf="form.get('zip')?.invalid && form.get('zip')?.touched"
+              class="error text-red-500"
+            >
+              ZIP code must be 6 digits.
+            </div>
           </div>
           <div class="flex flex-col">
             <label class="label" for="country">Country:</label>
@@ -124,22 +154,24 @@
               class="input-field"
             />
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
-    <div class="flex mt-6">
+    <div class="flex flex-row justify-evenly items-center mt-6">
       @if (mode === 'edit'){
-      <button type="submit" class="button button-edit" (click)="onSubmit()">
-        Edit
+      <button type="submit" class="button button-edit" [ngClass]="{'cursor-not-allowed': form.invalid}" (click)="onSubmit()">
+        Save
       </button>
       } @else {
-      <button type="submit" class="button button-edit" (click)="onSubmit()">
+      <button type="submit" class="button button-edit" [ngClass]="{'cursor-not-allowed': form.invalid}" (click)="onSubmit()">
         Add
       </button>
-      }
+      } @if(mode === 'edit'){
       <button type="button" class="button button-delete" (click)="onDelete()">
         Delete
       </button>
+
+      }
     </div>
   </div>
 </div>

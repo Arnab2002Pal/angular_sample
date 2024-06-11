@@ -87,8 +87,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         next: (response: User[]) => {
           this.rowData = response;
         },
-        error: (error) => {
-          alert('No such Data');
+        error: (error:any) => {
+          alert(error.message);
         }
       }
     );

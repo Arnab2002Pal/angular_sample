@@ -9,7 +9,6 @@ import { UserDataComponent } from '../../component/user-data/user-data.component
 import { GlobalSearchComponent } from '../../component/global-search/global-search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PipeFormatDobPipe } from '../../pipe/pipe-format-dob.pipe';
-import { AddUserModule } from '../add-user/add-user.module';
 
 @NgModule({
   declarations: [

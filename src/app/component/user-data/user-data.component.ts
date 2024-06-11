@@ -6,9 +6,10 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { User } from '../../interface/User';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../../services/user-service.service';
+import { contactNumberValidator, differentNamesValidator, workExperienceValidator, zipCodeValidator } from '../../validators/custom-validators';
 
 @Component({
   selector: 'app-user-data',
@@ -25,25 +26,25 @@ export class UserDataComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private userService: UserServiceService
   ) {
     this.form = this.fb.group({
       id: [''],
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      contactNo: [''],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      contactNo: ['', [Validators.required, contactNumberValidator()]],
       dob: [''],
-      workExperience: [''],
+      workExperience: ['', [workExperienceValidator()]],
       addressLine1: [''],
       addressLine2: [''],
       city: [''],
-      zip: [''],
+      zip: ['', [zipCodeValidator()]],
       country: [''],
       state: [''],
-    });
+    }, { validators: differentNamesValidator() });
   }
+
 
   open(user?: User) {
     if (user) {
@@ -61,18 +62,21 @@ export class UserDataComponent {
   }
 
   onSubmit() {
-    if (this.mode === 'edit') {
+    
+    if (this.form.invalid) {
+      return;
+    } else if (this.mode === 'edit') {
       this.userService.editUser(this.form.value.id, this.form.value).subscribe({
         next: (response) => {
           this.show = false;
-          this.editComplete.emit(); // Emit the event when edit is complete
+          this.editComplete.emit(); 
         },
       });
     } else {
       this.userService.addUser(this.form.value).subscribe({
         next: (response) => {
           this.show = false;
-          this.editComplete.emit(); // Emit the event when add is complete
+          this.editComplete.emit(); 
         },
       });
     }
@@ -83,7 +87,7 @@ export class UserDataComponent {
       next: (data) => {
         console.log('Successfully Deleted!');
         this.show = false;
-        this.editComplete.emit(); // Emit the event when delete is complete
+        this.editComplete.emit();
       },
       error: (error) => {
         console.log('Encountered Error:', error);
